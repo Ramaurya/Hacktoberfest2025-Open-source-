@@ -1,0 +1,58 @@
+class Solution {
+    
+    public void bubbleSort(double[] newArray) {
+        int n = newArray.length;
+        boolean swapped;
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (newArray[j] > newArray[j + 1]) {
+                    double temp = newArray[j];
+                    newArray[j] = newArray[j + 1];
+                    newArray[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) {
+                break;
+            }
+        }
+    }
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int size1 = nums1.length;
+        int size2 = nums2.length;
+        double newArray[] = new double[size1 + size2];
+
+       
+        for (int i = 0; i < size1; i++) {
+            newArray[i] = nums1[i];
+        }
+
+        
+        for (int i = 0; i < size2; i++) {
+           
+            newArray[size1 + i] = nums2[i];
+        }
+        
+       
+        bubbleSort(newArray);
+        
+        int size = newArray.length;
+
+       
+        if (size == 0) {
+            return 0.0; 
+        }
+        
+        if (size % 2 == 0) {
+            
+            double middle1 = newArray[size / 2 - 1];
+            double middle2 = newArray[size / 2];
+            return (middle1 + middle2) / 2.0;
+        } else {
+            
+            return newArray[size / 2];
+        }
+    }
+}
